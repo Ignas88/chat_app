@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import { Consumer } from "../context";
 
 const styles = theme => ({
   container: {
@@ -31,15 +30,19 @@ class Login extends Component {
     password: ''
   };
 
-  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     const { classes } = this.props;
+    const { email, password } = this.state;
+    const isValid = email && password;
 
     return (
       <div>
         <Paper className={classes.root} elevation={2}>
-          <form className={classes.container} noValidate autoComplete="off">
+          <form className={classes.container} noValidate autoComplete="off" onSubmit={this.onSubmit} >
             <TextField
               id="outlined-email-input"
               label="Email"
@@ -49,7 +52,7 @@ class Login extends Component {
               type="email"
               name="email"
               autoComplete="email"
-              margin="normal"
+              margin="dense"
               variant="outlined"
             />
             <TextField
@@ -61,11 +64,17 @@ class Login extends Component {
               name="password"
               type="password"
               autoComplete="current-password"
-              margin="normal"
+              margin="dense"
               variant="outlined"
             />
-            <Button variant="outlined" color="primary" className={classes.button}>
-              Primary
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={this.props.clickHandler}
+              disabled={!isValid}
+            >
+              Log In
             </Button>
           </form>
         </Paper>

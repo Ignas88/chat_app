@@ -4,6 +4,7 @@ const Context = React.createContext();
 
 export class Provider extends Component{
   state = {
+    name: 'john',
     auth: false
   };
 

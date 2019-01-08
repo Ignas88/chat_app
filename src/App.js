@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Provider } from "./context";
+import { Route, Switch, Redirect  } from "react-router-dom";
 
 import Login from './containers/Login';
 import Main from './containers/Main';
@@ -10,29 +9,35 @@ class App extends Component {
     auth: false
   };
 
+  clickHandler = () => {
+    this.setState({
+      auth: true
+    })
+  };
+
   render() {
     const { auth } = this.state;
 
     let routes = (
         <Switch>
-          <Route exact path="/" component={Main}/>
+          <Route path="/login" render={(props) => <Login {...props} clickHandler={this.clickHandler} />} />
+          <Redirect from="/" to="/login" />
         </Switch>
     );
 
-    if (auth === false) {
+    if (auth) {
       routes = (
         <Switch>
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Main}/>
+          <Redirect to="/" />
         </Switch>
       )
     }
 
     return (
-      <Provider>
-        <Router>
-          {routes}
-        </Router>
-      </Provider>
+      <div>
+        {routes}
+      </div>
     );
   }
 }
