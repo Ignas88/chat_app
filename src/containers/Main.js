@@ -10,7 +10,7 @@ import MessageInput from '../components/MessageInput';
 
 const drawerWidth = 240;
 
-const styles = theme => ({
+const styles = {
   root: {
     display: 'flex',
     height: '100%'
@@ -25,7 +25,7 @@ const styles = theme => ({
     flexDirection: 'column',
     justifyContent: 'space-between'
   },
-});
+};
 
 class Main extends Component {
   render() {
@@ -45,10 +45,6 @@ class Main extends Component {
               </AppBar>
               <Sidebar />
               <main className={classes.content}>
-                {/*<div>*/}
-                  {/*message*/}
-                {/*</div>*/}
-
                 <div className={classes.toolbar} />
                 <Typography paragraph>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
