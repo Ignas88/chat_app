@@ -20,7 +20,7 @@ const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2
   }
 });
 
@@ -30,24 +30,22 @@ class Login extends Component {
     password: ''
   };
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
-    const { classes } = this.props;
+    const { classes, clickHandler } = this.props;
     const { email, password } = this.state;
     const isValid = email && password;
 
     return (
       <div>
         <Paper className={classes.root} elevation={2}>
-          <form className={classes.container} noValidate autoComplete="off" onSubmit={this.onSubmit} >
+          <form className={classes.container} noValidate autoComplete="off">
             <TextField
               id="outlined-email-input"
               label="Email"
               className={classes.textField}
-              value={this.state.email}
+              value={email}
               onChange={this.onChange}
               type="email"
               name="email"
@@ -59,7 +57,7 @@ class Login extends Component {
               id="outlined-password-input"
               label="Password"
               className={classes.textField}
-              value={this.state.password}
+              value={password}
               onChange={this.onChange}
               name="password"
               type="password"
@@ -71,10 +69,10 @@ class Login extends Component {
               variant="outlined"
               color="primary"
               className={classes.button}
-              onClick={this.props.clickHandler}
+              onClick={clickHandler}
               disabled={!isValid}
             >
-              Log In
+              LogIn
             </Button>
           </form>
         </Paper>

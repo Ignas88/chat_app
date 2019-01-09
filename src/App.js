@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect  } from "react-router-dom";
-
 import Login from './containers/Login';
 import Main from './containers/Main';
 
@@ -35,9 +34,9 @@ class App extends Component {
     }
 
     return (
-      <div>
+      <React.Fragment>
         {routes}
-      </div>
+      </React.Fragment>
     );
   }
 }
