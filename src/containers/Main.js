@@ -6,14 +6,19 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {Consumer} from '../context';
 import Sidebar from '../components/sidebar/Sidebar';
-import MessageInput from '../components/MessageInput';
+import Messages from '../components/message/Messages';
+import MessageInput from '../components/message/MessageInput';
 
 const drawerWidth = 240;
 
 const styles = {
   root: {
     display: 'flex',
-    height: '100%'
+    height: '100%',
+    width: '100%',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    paddingLeft: 240
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -22,8 +27,11 @@ const styles = {
   content: {
     flexGrow: 1,
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between'
+    padding: 25,
+    height: '80%',
+    overflow: 'scroll',
+    overflowX: 'hidden',
+    marginTop: 65
   },
 };
 
@@ -46,20 +54,9 @@ class Main extends Component {
               <Sidebar />
               <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Typography paragraph>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                  ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                  facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                  gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                  donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                  adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                  Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                  imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                  arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                  donec massa sapien faucibus et molestie ac.
-                </Typography>
-                  <MessageInput />
+                  <Messages />
               </main>
+              <MessageInput />
             </div>
             )
         }}
