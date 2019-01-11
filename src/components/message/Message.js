@@ -19,29 +19,21 @@ class Message extends Component {
 
 
   render() {
-    const { classes } = this.props;
+    const { classes, author, content } = this.props;
 
     return (
-      <Consumer>
-        {value => {
-          const {messages} = value;
-
-          return (
-            <React.Fragment>
-              <Grid item xs={12}>
-                <Card className={classes.card}>
-                  <CardHeader title={messages.author}/>
-                  <CardContent>
-                    <Typography component="p">
-                      {messages.content}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </React.Fragment>
-          )
-        }}
-      </Consumer>
+      <React.Fragment>
+        <Grid item xs={12}>
+          <Card className={classes.card}>
+            <CardHeader title={author}/>
+            <CardContent>
+              <Typography component="p">
+                {content}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </React.Fragment>
     );
   }
 }

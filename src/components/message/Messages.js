@@ -14,18 +14,13 @@ class Messages extends Component {
           return (
             <React.Fragment>
               <Grid container spacing={24}>
-                {/*{messages.map(message => (*/}
-                  {/*<Message*/}
-                    {/*// key={message.id}*/}
-                    {/*// author={message.author}*/}
-                    {/*// content={message.content}*/}
-                  {/*/>*/}
-                {/*))}*/}
-                <Message/>
-                {/*<Message/>*/}
-                {/*<Message/>*/}
-                {/*<Message/>*/}
-                {/*<Message/>*/}
+                {messages.map(message => (
+                  <Message
+                    key={message.id}
+                    author={message.author}
+                    content={message.content}
+                  />
+                ))}
               </Grid>
             </React.Fragment>
           )
