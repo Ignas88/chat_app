@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Consumer} from '../../context';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -21,18 +22,26 @@ class Message extends Component {
     const { classes } = this.props;
 
     return (
-      <React.Fragment>
-        <Grid item xs={12}>
-          <Card className={classes.card}>
-            <CardHeader title="Shrimp and Chorizo Paella" />
-            <CardContent>
-              <Typography component="p">
-                well meaning and kindly.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </React.Fragment>
+      <Consumer>
+        {value => {
+          const {messages} = value;
+
+          return (
+            <React.Fragment>
+              <Grid item xs={12}>
+                <Card className={classes.card}>
+                  <CardHeader title={messages.author}/>
+                  <CardContent>
+                    <Typography component="p">
+                      {messages.content}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </React.Fragment>
+          )
+        }}
+      </Consumer>
     );
   }
 }
