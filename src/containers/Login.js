@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import uuid from 'uuid';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import {Consumer} from "../context";
 
 const styles = theme => ({
   container: {
@@ -26,57 +28,78 @@ const styles = theme => ({
 
 class Login extends Component {
   state = {
-    email: '',
+    name: '',
     password: ''
+  };
+
+  onClick = (dispatch, e) => {
+    e.preventDefault();
+    const { name } = this.state;
+
+    const newUser = {
+      id: uuid(),
+      name,
+      lastName: ''
+    };
+
+    dispatch({ type: 'ADD_USER', payload: newUser });
+    dispatch({type: 'CHANGE_AUTH', payload: true});
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
-    const { classes, clickHandler } = this.props;
-    const { email, password } = this.state;
-    const isValid = email && password;
+    const { classes } = this.props;
+    const { name, password } = this.state;
+    const isValid = name && password;
 
     return (
-      <div>
-        <Paper className={classes.root} elevation={2}>
-          <form className={classes.container} noValidate autoComplete="off">
-            <TextField
-              id="outlined-email-input"
-              label="Email"
-              className={classes.textField}
-              value={email}
-              onChange={this.onChange}
-              type="email"
-              name="email"
-              autoComplete="email"
-              margin="dense"
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              className={classes.textField}
-              value={password}
-              onChange={this.onChange}
-              name="password"
-              type="password"
-              autoComplete="current-password"
-              margin="dense"
-              variant="outlined"
-            />
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-              onClick={clickHandler}
-              disabled={!isValid}
-            >
-              LogIn
-            </Button>
-          </form>
-        </Paper>
-      </div>
+      <Consumer>
+        {value => {
+          const { dispatch } = value;
+
+          return (
+            <React.Fragment>
+              <Paper className={classes.root} elevation={2}>
+                <form className={classes.container}>
+                  <TextField
+                    id="outlined-email-input"
+                    label="Name"
+                    className={classes.textField}
+                    value={name}
+                    onChange={this.onChange}
+                    type="text"
+                    name="name"
+                    margin="dense"
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="outlined-password-input"
+                    label="Password"
+                    className={classes.textField}
+                    value={password}
+                    onChange={this.onChange}
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    margin="dense"
+                    variant="outlined"
+                  />
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    className={classes.button}
+                    onClick={this.onClick.bind(this, dispatch)}
+                    disabled={!isValid}
+                  >
+                    LogIn
+                  </Button>
+                </form>
+              </Paper>
+            </React.Fragment>
+          )
+        }}
+      </Consumer>
     );
   }
 }

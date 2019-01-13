@@ -3,6 +3,7 @@ import {Consumer} from '../../context';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import uuid from "uuid";
 
 const styles = theme => ({
   container: {
@@ -16,23 +17,41 @@ const styles = theme => ({
 });
 
 class MessageInput extends Component {
+  state = {
+    message: ''
+  };
+
+  onSubmit = (dispatch, e) => {
+    e.preventDefault();
+    const { message } = this.state;
+
+    const newMessage = {
+      id: uuid(),
+      content: message,
+    };
+
+    dispatch({ type: 'ADD_MESSAGE', payload: newMessage });
+  };
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     const { classes } = this.props;
+    const { message } = this.state;
 
     return (
       <Consumer>
         {value => {
-          const { message, onChange } = value;
+          const { dispatch } = value;
 
           return (
-            <form className={classes.container} noValidate autoComplete="off">
+            <form className={classes.container} noValidate autoComplete="off" onSubmit={this.onSubmit.bind(this, dispatch)}>
               <TextField
                 id="outlined-email-input"
                 label="Message"
                 className={classes.textField}
                 value={message}
-                onChange={onChange}
+                onChange={this.onChange}
                 type="text"
                 name="message"
                 margin="dense"

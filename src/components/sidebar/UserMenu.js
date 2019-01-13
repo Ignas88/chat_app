@@ -53,7 +53,6 @@ class UserMenu extends Component {
     return (
       <Consumer>
         {value => {
-
           const { users } = value;
 
           return (

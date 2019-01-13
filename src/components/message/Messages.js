@@ -8,7 +8,6 @@ class Messages extends Component {
     return (
       <Consumer>
         {value => {
-
           const {messages} = value;
 
           return (
@@ -17,7 +16,6 @@ class Messages extends Component {
                 {messages.map(message => (
                   <Message
                     key={message.id}
-                    author={message.author}
                     content={message.content}
                   />
                 ))}
