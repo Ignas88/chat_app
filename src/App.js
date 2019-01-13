@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect  } from "react-router-dom";
 import {Consumer} from "./context";
+import User from './containers/User';
 import Login from './containers/Login';
 import Main from './containers/Main';
 
@@ -23,6 +24,7 @@ class App extends Component {
           if (auth) {
             routes = (
               <Switch>
+                <Route path="/user" component={User}/>
                 <Route exact path="/" component={Main}/>
                 <Redirect to="/" />
               </Switch>

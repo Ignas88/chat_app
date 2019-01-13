@@ -27,6 +27,7 @@ const styles = {
   content: {
     flexGrow: 1,
     display: 'flex',
+    alignItems: 'flex-start',
     padding: 25,
     height: '80%',
     overflow: 'scroll',

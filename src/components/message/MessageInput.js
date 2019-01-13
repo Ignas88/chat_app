@@ -31,6 +31,10 @@ class MessageInput extends Component {
     };
 
     dispatch({ type: 'ADD_MESSAGE', payload: newMessage });
+
+    this.setState({
+      message: ''
+    });
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });

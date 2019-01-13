@@ -12,7 +12,7 @@ class Messages extends Component {
 
           return (
             <React.Fragment>
-              <Grid container spacing={24}>
+              <Grid container spacing={24} wrap="wrap-reverse">
                 {messages.map(message => (
                   <Message
                     key={message.id}

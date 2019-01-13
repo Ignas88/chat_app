@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom'
 import {Consumer} from '../../context';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
@@ -25,11 +26,6 @@ const styles = {
   },
 };
 
-const options = [
-  'User Info',
-  'Log Out'
-];
-
 const ITEM_HEIGHT = 48;
 
 class UserMenu extends Component {
@@ -43,6 +39,11 @@ class UserMenu extends Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null });
+    this.props.history.push('/user');
+  };
+
+  handleLogout = (dispatch) => {
+    dispatch({type: 'CHANGE_AUTH', payload: false});
   };
 
   render() {
@@ -53,7 +54,7 @@ class UserMenu extends Component {
     return (
       <Consumer>
         {value => {
-          const { users } = value;
+          const { users, dispatch } = value;
 
           return (
             <div>
@@ -84,11 +85,8 @@ class UserMenu extends Component {
                   },
                 }}
               >
-                {options.map(option => (
-                  <MenuItem key={option} onClick={this.handleClose}>
-                    {option}
-                  </MenuItem>
-                ))}
+                <MenuItem onClick={this.handleClose}>User Info</MenuItem>
+                <MenuItem onClick={this.handleLogout.bind(this, dispatch)}>LogOut</MenuItem>
               </Menu>
             </div>
           )
@@ -102,4 +100,4 @@ UserMenu.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(UserMenu);
+export default withRouter(withStyles(styles)(UserMenu));
