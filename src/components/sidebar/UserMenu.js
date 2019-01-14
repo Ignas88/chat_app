@@ -39,7 +39,11 @@ class UserMenu extends Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null });
-    this.props.history.push('/user');
+  };
+
+  onClick = (users) => {
+    this.setState({ anchorEl: null });
+    this.props.history.push(`/user/${users[0].id}`);
   };
 
   handleLogout = (dispatch) => {
@@ -85,7 +89,7 @@ class UserMenu extends Component {
                   },
                 }}
               >
-                <MenuItem onClick={this.handleClose}>User Info</MenuItem>
+                <MenuItem onClick={this.onClick.bind(this, users)}>User Info</MenuItem>
                 <MenuItem onClick={this.handleLogout.bind(this, dispatch)}>LogOut</MenuItem>
               </Menu>
             </div>

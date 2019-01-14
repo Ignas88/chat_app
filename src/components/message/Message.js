@@ -17,7 +17,6 @@ const styles = {
 
 class Message extends Component {
 
-
   render() {
     const { classes, content } = this.props;
 

@@ -24,7 +24,7 @@ class App extends Component {
           if (auth) {
             routes = (
               <Switch>
-                <Route path="/user" component={User}/>
+                <Route path="/user/:id" component={User}/>
                 <Route exact path="/" component={Main}/>
                 <Redirect to="/" />
               </Switch>

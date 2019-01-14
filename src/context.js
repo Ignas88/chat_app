@@ -14,6 +14,11 @@ const reducer = (state, action) => {
       ...state,
       auth: action.payload
     };
+    case 'SHOW_DIALOG':
+      return {
+        ...state,
+        open: action.payload
+      };
     case 'ADD_MESSAGE':
       return {
         ...state,
@@ -27,6 +32,7 @@ const reducer = (state, action) => {
 export class Provider extends Component{
   state = {
     auth: false,
+    open: false,
     users: [
       {
         id: 1,

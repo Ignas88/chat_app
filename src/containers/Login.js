@@ -39,7 +39,9 @@ class Login extends Component {
     const newUser = {
       id: uuid(),
       name,
-      lastName: ''
+      lastName: '',
+      email: '',
+      phone: ''
     };
 
     dispatch({ type: 'ADD_USER', payload: newUser });
