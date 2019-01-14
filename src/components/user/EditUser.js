@@ -14,6 +14,8 @@ class EditUser extends Component {
     dispatch({type: 'SHOW_DIALOG', payload: false});
   };
 
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
+
   render() {
     return (
       <Consumer>
@@ -27,18 +29,46 @@ class EditUser extends Component {
                 onClose={this.handleClose.bind(this, dispatch)}
                 aria-labelledby="form-dialog-title"
               >
-                <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                <DialogTitle id="form-dialog-title">Edit User</DialogTitle>
                 <DialogContent>
-                  <DialogContentText>
-                    To subscribe to this website, please enter your email address here. We will send
-                    updates occasionally.
-                  </DialogContentText>
                   <TextField
                     autoFocus
                     margin="dense"
-                    id="name"
+                    value={users[0].name}
+                    onChange={this.onChange}
+                    name="name"
+                    label="Name"
+                    type="text"
+                    fullWidth
+                  />
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    value={users[0].lastName}
+                    onChange={this.onChange}
+                    name="lastName"
+                    label="Last Name"
+                    type="text"
+                    fullWidth
+                  />
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    value={users[0].email}
+                    onChange={this.onChange}
+                    name="email"
                     label="Email Address"
-                    type="email"
+                    type="text"
+                    fullWidth
+                  />
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    value={users[0].phone}
+                    onChange={this.onChange}
+                    name="phone"
+                    label="Phone Number"
+                    type="text"
                     fullWidth
                   />
                 </DialogContent>
