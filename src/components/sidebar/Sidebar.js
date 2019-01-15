@@ -29,7 +29,6 @@ const styles = theme => ({
 
 class Sidebar extends Component {
 
-
   render() {
     const {classes} = this.props;
 
