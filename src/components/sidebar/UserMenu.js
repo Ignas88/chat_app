@@ -48,6 +48,7 @@ class UserMenu extends Component {
 
   handleLogout = (dispatch) => {
     dispatch({type: 'CHANGE_AUTH', payload: false});
+    window.location.reload();
   };
 
   render() {
