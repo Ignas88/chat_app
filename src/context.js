@@ -9,6 +9,18 @@ const reducer = (state, action) => {
         ...state,
         users: [action.payload, ...state.users]
       };
+    case 'DELETE_USER':
+      return {
+        ...state,
+        users: state.users.filter(
+          user => user.id !== action.payload
+        )
+      };
+    case 'ADD_MESSAGE':
+      return {
+        ...state,
+        messages: [action.payload, ...state.messages]
+      };
     case 'CHANGE_AUTH':
       return {
       ...state,
@@ -18,11 +30,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         open: action.payload
-      };
-    case 'ADD_MESSAGE':
-      return {
-        ...state,
-        messages: [action.payload, ...state.messages]
       };
     default:
       return state;
